@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:social_network_flutter/home.dart';
+import 'package:social_network_flutter/register.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -81,15 +82,30 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               )
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextButton(
-                onPressed: () {
-                  signIn();
-                },
-                child: const Text('Entrar'),
-              ),
-            )
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextButton(
+                    onPressed: () {
+                      signIn();
+                    },
+                    child: const Text('Entrar'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RegisterPage()),
+                      );
+                    },
+                    child: const Text('Cadastrar'),
+                  ),
+                )
+            ])
           ],
         ),
       ),
