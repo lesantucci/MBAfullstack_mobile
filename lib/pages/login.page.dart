@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:social_network_flutter/home.dart';
-import 'package:social_network_flutter/register.dart';
+
+import 'package:social_network_flutter/pages/produtos.page.dart';
+import 'package:social_network_flutter/pages/register.page.dart';
+import 'package:social_network_flutter/services/usuario.service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,29 +14,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _email = '';
+  String _login = '';
   String _password = '';
 
   void signIn() async {
-    print('E-mail: $_email');
-    print('Password: $_password');
-
-    String api = 'https://social-network-for-class.herokuapp.com/auth/login';
-
-    Response response = await post(
-      Uri.parse(api),
-      headers: <String, String>{'Content-Type': 'application/json'},
-      body: jsonEncode(<String, String>{'email': _email, 'password': _password}),
-    );
-    
-    if (response.statusCode == 201) {
-      Navigator.pushReplacement(
+    final usuarioService = UsuarioService();
+    usuarioService.realizarLogin(_login, _password).then((value) => {
+      if(value) {
+        Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-    } else {
-      // Alert: E-mail / senha inválido(a).
-    }
+        MaterialPageRoute(builder: (context) => const ProdutosPage()),
+      )} 
+    });
   }
 
   @override
@@ -58,12 +46,12 @@ class _LoginPageState extends State<LoginPage> {
               child:TextFormField(
                 onChanged: (text) {
                   setState(() {
-                    _email = text;
+                    _login = text;
                   });
                 },
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
-                  labelText: 'Informe o e-mail:',
+                  labelText: 'Informe o login:',
                 ),
               )
             ),

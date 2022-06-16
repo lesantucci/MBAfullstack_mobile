@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:social_network_flutter/home.dart';
-import 'package:social_network_flutter/login.dart';
+import 'package:flutter/services.dart';
+import 'package:social_network_flutter/pages/login.page.dart';
+import 'package:social_network_flutter/services/usuario.service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -19,28 +19,20 @@ class _RegisterPageState extends State<RegisterPage> {
   String _name = '';
   String _email = '';
   String _password = '';
+  int _idade = 0;
+  String _address = '';
   String _validate_password = '';
 
   void register() async {
-    log('Teste');
-    if(validatePassword()) {
-      log('Teste2');
-      String api = 'https://social-network-for-class.herokuapp.com/users';
-      Response response = await post(
-      Uri.parse(api),
-        headers: <String, String>{'Content-Type': 'application/json'},
-        body: jsonEncode(<String, String>{'name': _name, 'email': _email, 'password': _password}),
-      );
-    
-      log(response.statusCode.toString());
-      if (response.statusCode == 201) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LoginPage()),
-        );
-      } else {
-        _showMyDialog();
-      }
+      if(validatePassword()) {
+        final usuarioService = UsuarioService();
+        usuarioService.cadastrarUsuario(_name, _email, _password).then((value) => {
+          value ? Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          ) :
+          _showMyDialog()
+        });
     }
   }
     
@@ -59,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
         content: SingleChildScrollView(
           child: ListBody(
             children: const <Widget>[
-              Text('Ocorreu um erro de comunicação com a base de dados ou algum dos campos está incompleto'),
+              Text('Ocorreu um erro de comunicação com a base de dados ou algum dos campos está incompleto'), 
             ],
           ),
         ),
@@ -92,6 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child:TextFormField(
+                keyboardType: TextInputType.name,
                 onChanged: (text) {
                   setState(() {
                     _name = text;
@@ -106,6 +99,22 @@ class _RegisterPageState extends State<RegisterPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child:TextFormField(
+                keyboardType: TextInputType.number,
+                onChanged: (text) {
+                  setState(() {
+                    _idade = int.parse(text);
+                  });
+                },
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Informe a idade:',
+                ),
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child:TextFormField(
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (text) {
                   setState(() {
                     _email = text;
@@ -113,7 +122,22 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
-                  labelText: 'Informe o email:',
+                  labelText: 'Informe o email para Login:',
+                ),
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child:TextFormField(
+                keyboardType: TextInputType.streetAddress,
+                onChanged: (text) {
+                  setState(() {
+                    _address = text;
+                  });
+                },
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Informe o endereço:',
                 ),
               )
             ),
