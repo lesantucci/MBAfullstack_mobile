@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:social_network_flutter/commons/handler/http.dart';
-import 'package:social_network_flutter/models/product.model.dart';
-import 'package:social_network_flutter/variables/api-endpoints.dart';
+import 'package:mba_ecommerce/commons/handler/http.dart';
+import 'package:mba_ecommerce/models/product.model.dart';
+import 'package:mba_ecommerce/variables/api-endpoints.dart';
 
 class ProdutoService {
   

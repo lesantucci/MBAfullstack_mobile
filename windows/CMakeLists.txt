@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(social_network_flutter LANGUAGES CXX)
+project(mba_ecommerce LANGUAGES CXX)
 
-set(BINARY_NAME "social_network_flutter")
+set(BINARY_NAME "mba_ecommerce")
 
 cmake_policy(SET CMP0063 NEW)
 

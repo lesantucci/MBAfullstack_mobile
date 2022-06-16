@@ -3,8 +3,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:social_network_flutter/pages/login.page.dart';
-import 'package:social_network_flutter/services/usuario.service.dart';
+import 'package:mba_ecommerce/pages/login.page.dart';
+import 'package:mba_ecommerce/services/usuario.service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);

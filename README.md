@@ -1,4 +1,4 @@
-# social_network_flutter
+# mba_ecommerce
 
 A new Flutter project.
 

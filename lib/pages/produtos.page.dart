@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_network_flutter/models/product.model.dart';
-import 'package:social_network_flutter/services/produto.service.dart';
+import 'package:mba_ecommerce/models/product.model.dart';
+import 'package:mba_ecommerce/services/produto.service.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({ Key? key }) : super(key: key);

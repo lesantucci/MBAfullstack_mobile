@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:social_network_flutter/pages/produtos.page.dart';
-import 'package:social_network_flutter/pages/register.page.dart';
-import 'package:social_network_flutter/services/usuario.service.dart';
+import 'package:mba_ecommerce/pages/produtos.page.dart';
+import 'package:mba_ecommerce/pages/register.page.dart';
+import 'package:mba_ecommerce/services/usuario.service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

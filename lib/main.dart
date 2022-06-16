@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_network_flutter/pages/login.page.dart';
+import 'package:mba_ecommerce/pages/login.page.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,4 +1,4 @@
-import 'package:social_network_flutter/models/factory.model.dart';
+import 'package:mba_ecommerce/models/factory.model.dart';
 
 class Product {
   final int id;

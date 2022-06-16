@@ -1,4 +1,4 @@
-package com.example.social_network_flutter
+package com.example.mba_ecommerce
 
 import io.flutter.embedding.android.FlutterActivity
 
