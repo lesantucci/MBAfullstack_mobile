@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mba_ecommerce/models/costumer.model.dart';
 import 'package:mba_ecommerce/pages/login.page.dart';
 import 'package:mba_ecommerce/services/usuario.service.dart';
 
@@ -26,7 +27,13 @@ class _RegisterPageState extends State<RegisterPage> {
   void register() async {
       if(validatePassword()) {
         final usuarioService = UsuarioService();
-        usuarioService.cadastrarUsuario(_name, _email, _password).then((value) => {
+        usuarioService.cadastrarUsuario(Costumer(
+          address: _address,
+          age: _idade,
+          email: _email,
+          name: _name,
+          userPassword: _password
+          )).then((value) => {
           value ? Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -100,9 +107,11 @@ class _RegisterPageState extends State<RegisterPage> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child:TextFormField(
                 keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly],
                 onChanged: (text) {
                   setState(() {
-                    _idade = int.parse(text);
+                    _idade = int.tryParse(text)!;
                   });
                 },
                 decoration: const InputDecoration(
